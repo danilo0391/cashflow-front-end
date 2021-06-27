@@ -13,7 +13,8 @@ import authHeader from "../../services/auth-header";
 
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/users/";
+// const API_URL = "http://localhost:8080/api/users/";
+const API_URL = "https://cashflow-app-backend.herokuapp.com/api/users/";
 
 export default class User extends Component {
 	constructor(props) {
