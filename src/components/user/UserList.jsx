@@ -10,7 +10,7 @@ import axios from "axios";
 import authHeader from "../../services/auth-header";
 
 // const API_URL = "http://localhost:8080/api/users/";
-const API_URL = "https://cashflow-app-backend.herokuapp.com/api/users/";
+const API_URL = "https://cashflow-back-end.herokuapp.com/api/users/";
 
 export default class UsersComponent extends Component {
 

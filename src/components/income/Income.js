@@ -14,7 +14,7 @@ import authHeader from "../../services/auth-header";
 import axios from "axios";
 
 // const API_URL = "http://localhost:8080/api/incomes/";
-const API_URL = "https://cashflow-app-backend.herokuapp.com/api/incomes/";
+const API_URL = "https://cashflow-back-end.herokuapp.com/api/incomes/";
 
 export default class Income extends Component {
 	constructor(props) {
