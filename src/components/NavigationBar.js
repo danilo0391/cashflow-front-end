@@ -30,6 +30,9 @@ export default class NavigationBar extends Component {
 		const superUserLinks = (
 			<>
 				<Nav className="mr-auto">
+					<Link to={"dashboard"} className="nav-link">
+						Dashboard
+					</Link>
 					<Link to={"addIncome"} className="nav-link">
 						Add Income
 					</Link>
@@ -61,6 +64,9 @@ export default class NavigationBar extends Component {
 		const regularUserLinks = (
 			<>
 				<Nav className="mr-auto">
+					<Link to={"dashboard"} className="nav-link">
+						Dashboard
+					</Link>
 					<Link to={"listIncome"} className="nav-link">
 						Income List
 					</Link>

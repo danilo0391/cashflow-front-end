@@ -15,6 +15,7 @@ import UserList from "././components/user/UserList";
 import Login from "./components/login";
 import Register from "./components/register";
 import Profile from "./components/profile";
+import Dashboard from "./components/Dashboard";
 
 export default function App() {
 	return (
@@ -25,6 +26,7 @@ export default function App() {
 					<Col lg={12} className={"margin-top"}>
 						<Switch>
 							<Route path="/" exact component={Welcome} />
+							<Route path="/dashboard" exact component={Dashboard} />
 							<Route path="/addIncome" exact component={Income} />
 							<Route path="/editIncome/:id" exact component={Income} />
 							<Route path="/listIncome" exact component={IncomeList} />
@@ -41,7 +43,7 @@ export default function App() {
 					</Col>
 				</Row>
 			</Container>
-			<Footer />
+			{/* <Footer /> */}
 		</Router>
 	);
 }
