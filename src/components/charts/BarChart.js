@@ -4,7 +4,6 @@ import { Bar } from "react-chartjs-2";
 
 import axios from "axios";
 import authHeader from "../../services/auth-header";
-import { faLaptopHouse } from "@fortawesome/free-solid-svg-icons";
 
 export default class BarChart extends Component {
 	constructor(props) {

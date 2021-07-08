@@ -5,8 +5,6 @@ import { Pie } from "react-chartjs-2";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
 
-import IncomeList from "../income/IncomeList";
-
 export default class PieChart extends Component {
 	constructor(props) {
 		super(props);
