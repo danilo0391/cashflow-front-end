@@ -14,35 +14,37 @@ export default class BarChart extends Component {
 	}
 
 	componentDidMount() {
-		const API_URL = "https://cashflow-back-end.herokuapp.com/api/incomes/";
+		const API_URL = "https://cashflow-back-end.herokuapp.com/api/expenses/";
 		axios
 			.get(API_URL, {
 				headers: { Authorization: authHeader().Authorization },
 			})
 			.then((res) => {
-				const incomes = res.data;
-				let incomevalue = [];
-				console.log(incomevalue);
-				let incomecategory = [];
-				console.log(incomecategory);
-				incomes.forEach((element) => {
-					incomevalue.push(element.value);
-					incomecategory.push(element.date);
+				const expenses = res.data;
+				let expenseValue = [];
+				console.log(expenses[1]);
+				let expenseCategory = [];
+				expenses.forEach((element) => {
+					const index = expenseCategory.indexOf(element.category);
+					if (index >= 0) {
+						expenseValue[index] += element.value;
+					} else {
+						expenseValue.push(element.value);
+						expenseCategory.push(element.category);
+					}
 				});
 				this.setState({
 					Data: {
-						labels: incomecategory,
+						labels: expenseCategory,
 						datasets: [
 							{
-								label: "Incomes per Day",
-								data: incomevalue,
+								data: expenseValue,
 								backgroundColor: [
-									"rgba(255,105,145,0.6)",
-									"rgba(155,100,210,0.6)",
 									"rgba(90,178,255,0.6)",
 									"rgba(240,134,67,0.6)",
-									"rgba(120,120,120,0.6)",
+									"rgba(215, 197, 60, 1)",
 									"rgba(250,55,197,0.6)",
+									"rgba(60, 215, 60, 1)",
 								],
 							},
 						],
@@ -61,9 +63,12 @@ export default class BarChart extends Component {
 						plugins: {
 							title: {
 								display: true,
-								text: "Income's Bar Chart",
+								text: "Total Expenses per Category",
 								font: { size: 16 },
 								padding: { top: 10, bottom: 20 },
+							},
+							legend: {
+								display: false,
 							},
 						},
 					}}

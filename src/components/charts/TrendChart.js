@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 
-import { Pie } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 
 import axios from "axios";
 import authHeader from "../../services/auth-header";
 
-export default class PieChart extends Component {
+export default class TrendChart extends Component {
 	constructor(props) {
 		console.log(props);
 		super(props);
@@ -32,7 +32,7 @@ export default class PieChart extends Component {
 						incomeValue[index] += element.value;
 					} else {
 						incomeValue.push(element.value);
-						incomeCategory.push(element.category);
+						incomeCategory.push(element.date);
 					}
 				});
 				this.setState({
@@ -58,16 +58,19 @@ export default class PieChart extends Component {
 	render() {
 		return (
 			<div>
-				<Pie
+				<Line
 					data={this.state.Data}
 					options={{
 						maintainAspectRatio: true,
 						plugins: {
 							title: {
 								display: true,
-								text: "Income's Pie Chart",
+								text: "Income's Trend",
 								font: { size: 16 },
 								padding: { top: 10, bottom: 20 },
+							},
+							legend: {
+								display: false,
 							},
 						},
 					}}

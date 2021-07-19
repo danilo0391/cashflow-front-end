@@ -1,21 +1,42 @@
 import React, { Component } from "react";
 import PieChart from "./charts/PieChart";
 import BarChart from "./charts/BarChart";
+import TrendChart from "./charts/TrendChart";
+import { Card, CardColumns } from "react-bootstrap";
 
 export default class Dashboard extends Component {
 	render() {
 		return (
 			<div>
-				<div className="flex-column">
-					<div className="p-2 col-example text-left">
-						<PieChart />
-					</div>
-				</div>
-				<div className="d-flex flex-column-reverse">
-					<div className="p-2 col-example text-lef">
-						<BarChart />
-					</div>
-				</div>
+				<CardColumns>
+					<Card className="text-center" style={{ width: "30rem" }}>
+						<Card.Body>
+							<div>
+								<PieChart />
+							</div>
+						</Card.Body>
+					</Card>
+				</CardColumns>
+
+				<CardColumns>
+					<Card style={{ width: "50rem" }}>
+						<Card.Body>
+							<div>
+								<BarChart />
+							</div>
+						</Card.Body>
+					</Card>
+				</CardColumns>
+
+				<CardColumns>
+					<Card style={{ width: "50rem" }}>
+						<Card.Body>
+							<div>
+								<TrendChart />
+							</div>
+						</Card.Body>
+					</Card>
+				</CardColumns>
 			</div>
 		);
 	}
