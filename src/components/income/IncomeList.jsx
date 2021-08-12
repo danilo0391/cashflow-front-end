@@ -8,7 +8,6 @@ import MyToast from "../MyToast";
 import authHeader from "../../services/auth-header";
 import "../../style/Style";
 
-
 import axios from "axios";
 
 const API_URL = "https://cashflow-back-end.herokuapp.com/api/incomes/";
