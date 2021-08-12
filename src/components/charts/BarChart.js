@@ -14,7 +14,8 @@ export default class BarChart extends Component {
 	}
 
 	componentDidMount() {
-		const API_URL = "https://cashflow-back-end.herokuapp.com/api/expenses/";
+		const API_URL =
+			"https://cashflow-back-end.herokuapp.com/api/expenses/default";
 		axios
 			.get(API_URL, {
 				headers: { Authorization: authHeader().Authorization },

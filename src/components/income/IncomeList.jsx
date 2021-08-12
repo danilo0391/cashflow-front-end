@@ -6,10 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faListUl, faTrash, faStepBackward, faFastBackward, faStepForward, faFastForward, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import MyToast from "../MyToast";
 import authHeader from "../../services/auth-header";
+import "../../style/Style";
 
 import axios from "axios";
 
-// const API_URL = "http://localhost:8080/api/incomes/";
 const API_URL = "https://cashflow-back-end.herokuapp.com/api/incomes/";
 
 export default class IncomeList extends Component {
@@ -20,23 +20,57 @@ export default class IncomeList extends Component {
 			incomes: [],
 			search: '',
 			currentPage: 1,
-			incomesPerPage: 5
+			incomesPerPage: 10,
+			sortToggle: true,
 		};
 	}
 
+	sortData = () => {
+    this.setState(state => ({
+			sortToggle : !state.sortToggle
+		}));
+		this.findAllIncomes(this.state.currentPage);
+  };
+
 	componentDidMount() {
-		this.findAllIncomes();
+		this.findAllIncomes(this.state.currentPage);
 	};
 
-	findAllIncomes() {
-		axios.get(API_URL, {
+	findAllIncomes(currentPage) {
+		currentPage -= 1;
+		let sortDir = this.state.sortToggle ? "asc" : "desc";
+		axios.get(API_URL+"?pageNumber=" +
+		currentPage +
+		"&pageSize=" +
+		this.state.incomesPerPage +
+		"&sortBy=value&sortDir="+sortDir, {
 			headers: { Authorization: authHeader().Authorization },
 		})
-			.then(response => response.data)
-			.then((data) => {
-				this.setState({ incomes: data });
-			})
+		.then(response => response.data)
+		.then((data) => {
+			this.setState({
+				incomes: data.content,
+				totalPages: data.totalPages,
+				totalElements: data.totalElements,
+				currentPage: data.number + 1,
+			});	
+		})
+		.catch((error) => {
+			console.log(error);
+			localStorage.removeItem("jwtToken");
+			this.props.history.push("/");
+		});
 	};
+
+	// findAllIncomes() {
+	// 	axios.get(API_URL, {
+	// 		headers: { Authorization: authHeader().Authorization },
+	// 	})
+	// 		.then(response => response.data)
+	// 		.then((data) => {
+	// 			this.setState({ incomes: data });
+	// 		})
+	// };
 
 	deleteIncome = (incomeId) => {
 		axios.delete(API_URL + incomeId, {
@@ -181,7 +215,13 @@ export default class IncomeList extends Component {
 									<tr>
 										<th>ID</th>
 										<th>Description</th>
-										<th>Value</th>
+										<th onClick={this.sortData}>Value
+											<div className={
+                        this.state.sortToggle
+                          ? "arrow arrow-up"
+                          : "arrow arrow-down"}>
+											</div>
+										</th>
 										<th>Category</th>
 										<th>Date</th>
 										<th>Actions</th>

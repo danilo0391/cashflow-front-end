@@ -9,8 +9,8 @@ export default function Welcome(props) {
 			<blockquote className="blockquote mb-0">
 				<p1>
 					In this application you are going to be able to add, delete, update,
-					and read data from the database. Graphs will dynamically populate the
-					dashboard area showing the balance, history of expenses and incomes.
+					and read data from the database. Charts will dynamically populate the
+					dashboard area.
 				</p1>
 				<p2>
 					It is going to be possible to search data by date, category, value, as

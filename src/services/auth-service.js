@@ -22,6 +22,7 @@ class AuthService {
 	logout() {
 		localStorage.removeItem("user");
 		window.location.reload();
+		this.props.history.push("/");
 	}
 
 	register(username, email, password) {

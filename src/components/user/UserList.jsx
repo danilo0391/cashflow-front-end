@@ -9,7 +9,6 @@ import MyToast from "../MyToast";
 import axios from "axios";
 import authHeader from "../../services/auth-header";
 
-// const API_URL = "http://localhost:8080/api/users/";
 const API_URL = "https://cashflow-back-end.herokuapp.com/api/users/";
 
 export default class UsersComponent extends Component {
@@ -128,7 +127,6 @@ export default class UsersComponent extends Component {
 										<th>ID</th>
 										<th>Username</th>
 										<th>Email</th>
-										<th>Password</th>
 										<th>Actions</th>
 									</tr>
 								</tbody>
@@ -143,7 +141,6 @@ export default class UsersComponent extends Component {
 													<td> {users.id}</td>
 													<td> {users.username} </td>
 													<td> {users.email} </td>
-													<td> {users.password} </td>
 													<td>
 														<ButtonGroup>
 															<Link to={"editUser/" + users.id} className="btn btn-sm btn-outline-primary"> <FontAwesomeIcon icon={faEdit} /></Link>{" "}

@@ -16,7 +16,8 @@ export default class PieChart extends Component {
 	}
 
 	componentDidMount() {
-		const API_URL = "https://cashflow-back-end.herokuapp.com/api/incomes/";
+		const API_URL =
+			"https://cashflow-back-end.herokuapp.com/api/incomes/default";
 		axios
 			.get(API_URL, {
 				headers: { Authorization: authHeader().Authorization },

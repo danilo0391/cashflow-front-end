@@ -6,10 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faList, faTrash, faStepBackward, faFastBackward, faStepForward, faFastForward, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import MyToast from "../MyToast";
 import authHeader from "../../services/auth-header";
+import "../../style/Style";
 
 import axios from "axios";
 
-// const API_URL = "http://localhost:8080/api/expenses/";
 const API_URL = "https://cashflow-back-end.herokuapp.com/api/expenses/";
 
 export default class ExpenseList extends Component {
@@ -20,23 +20,57 @@ export default class ExpenseList extends Component {
 			expenses: [],
 			search: '',
 			currentPage: 1,
-			expensesPerPage: 5
+			expensesPerPage: 10,
+			sortToggle: true
 		};
 	}
 
+	sortData = () => {
+    this.setState(state => ({
+			sortToggle : !state.sortToggle
+		}));
+		this.findAllExpenses(this.state.currentPage);
+  };
+
 	componentDidMount() {
-		this.findAllExpenses();
+		this.findAllExpenses(this.state.currentPage);
 	}
 
-	findAllExpenses() {
-		axios.get(API_URL, {
+	findAllExpenses(currentPage) {
+		currentPage -= 1;
+		let sortDir = this.state.sortToggle ? "asc" : "desc";
+		axios.get(API_URL+"?pageNumber=" +
+		currentPage +
+		"&pageSize=" +
+		this.state.expensesPerPage +
+		"&sortBy=value&sortDir="+sortDir, {
 			headers: { Authorization: authHeader().Authorization },
 		})
-			.then(response => response.data)
-			.then((data) => {
-				this.setState({ expenses: data });
-			})
+		.then(response => response.data)
+		.then((data) => {
+			this.setState({
+				expenses: data.content,
+				totalPages: data.totalPages,
+				totalElements: data.totalElements,
+				currentPage: data.number + 1,
+			});	
+		})
+		.catch((error) => {
+			console.log(error);
+			localStorage.removeItem("jwtToken");
+			this.props.history.push("/");
+		});
 	};
+
+	// findAllExpenses() {
+	// 	axios.get(API_URL, {
+	// 		headers: { Authorization: authHeader().Authorization },
+	// 	})
+	// 		.then(response => response.data)
+	// 		.then((data) => {
+	// 			this.setState({ expenses: data });
+	// 		})
+	// };
 
 	deleteExpense = (expenseId) => {
 		axios.delete(API_URL + expenseId, {
@@ -171,7 +205,14 @@ export default class ExpenseList extends Component {
 									<tr>
 										<th>ID</th>
 										<th>Description</th>
-										<th>Value</th>
+										<th onClick={this.sortData} >Value
+											<div className={
+                        this.state.sortToggle
+                          ? "arrow arrow-up"
+                          : "arrow arrow-down"
+                      	}> 
+											</div>
+											</th>
 										<th>Category</th>
 										<th>Date</th>
 										<th>Actions</th>
