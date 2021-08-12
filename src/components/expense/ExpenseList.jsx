@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faList, faTrash, faStepBackward, faFastBackward, faStepForward, faFastForward, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 import MyToast from "../MyToast";
 import authHeader from "../../services/auth-header";
-import "../../style/Style";
+import "../../style/Style.css";
 
 import axios from "axios";
 
