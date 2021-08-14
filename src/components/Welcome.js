@@ -2,6 +2,7 @@ import React from "react";
 
 import { Jumbotron } from "react-bootstrap";
 
+//Welcome and public page of the web app
 export default function Welcome(props) {
 	return (
 		<Jumbotron>

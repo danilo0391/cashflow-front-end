@@ -13,6 +13,7 @@ import AuthService from "../services/auth-service";
 
 export default class NavigationBar extends Component {
 	render() {
+		//Navbar for public page
 		const guestLinks = (
 			<>
 				<div className="mr-auto"></div>
@@ -27,6 +28,7 @@ export default class NavigationBar extends Component {
 			</>
 		);
 
+		//Navbar for Admin and Moderator
 		const superUserLinks = (
 			<>
 				<Nav className="mr-auto">
@@ -61,6 +63,7 @@ export default class NavigationBar extends Component {
 			</>
 		);
 
+		//Navbar for regular user
 		const regularUserLinks = (
 			<>
 				<Nav className="mr-auto">
@@ -91,6 +94,8 @@ export default class NavigationBar extends Component {
 				<Link to={""} className="navbar-brand">
 					Home
 				</Link>
+				{/* This ternary operator checks if there is a user logged in. If is true, it does a second check
+				in the role. It show the correct Navbar depending on the user role */}
 				{AuthService.getCurrentUser() === null
 					? guestLinks
 					: AuthService.getCurrentUser().roles[0] === "ROLE_ADMIN" ||

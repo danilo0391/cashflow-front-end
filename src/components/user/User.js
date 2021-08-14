@@ -13,7 +13,6 @@ import authHeader from "../../services/auth-header";
 
 import axios from "axios";
 
-// const API_URL = "http://localhost:8080/api/users/";
 const API_URL = "https://cashflow-back-end.herokuapp.com/api/users/";
 
 export default class User extends Component {
@@ -39,6 +38,7 @@ export default class User extends Component {
 		}
 	}
 
+	//Function to find by id
 	findUserById = (userId) => {
 		axios
 			.get(API_URL + userId, {
@@ -59,10 +59,12 @@ export default class User extends Component {
 			});
 	};
 
+	//Function to reset the form
 	resetUser = () => {
 		this.setState(() => this.initialState);
 	};
 
+	//Function do add user
 	addUser = (event) => {
 		event.preventDefault();
 
@@ -88,6 +90,7 @@ export default class User extends Component {
 		this.setState(this.initialState);
 	};
 
+	//Function to update expense
 	updateUser = (event) => {
 		event.preventDefault();
 
@@ -115,12 +118,14 @@ export default class User extends Component {
 		this.setState(this.initialState);
 	};
 
+	//This function allows to change the values in the form
 	userChange = (event) => {
 		this.setState({
 			[event.target.name]: event.target.value,
 		});
 	};
 
+	//This function redirects to the list of users
 	userList = () => {
 		return this.props.history.push("/listUser");
 	};

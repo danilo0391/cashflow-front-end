@@ -25,6 +25,7 @@ export default class ExpenseList extends Component {
 		};
 	}
 
+	//Funtion to sort data
 	sortData = () => {
     this.setState(state => ({
 			sortToggle : !state.sortToggle
@@ -36,6 +37,7 @@ export default class ExpenseList extends Component {
 		this.findAllExpenses(this.state.currentPage);
 	}
 
+	//Function to find all expenses sorted
 	findAllExpenses(currentPage) {
 		currentPage -= 1;
 		let sortDir = this.state.sortToggle ? "asc" : "desc";
@@ -62,16 +64,7 @@ export default class ExpenseList extends Component {
 		});
 	};
 
-	// findAllExpenses() {
-	// 	axios.get(API_URL, {
-	// 		headers: { Authorization: authHeader().Authorization },
-	// 	})
-	// 		.then(response => response.data)
-	// 		.then((data) => {
-	// 			this.setState({ expenses: data });
-	// 		})
-	// };
-
+	//Function to delete an expense
 	deleteExpense = (expenseId) => {
 		axios.delete(API_URL + expenseId, {
 			headers: { Authorization: authHeader().Authorization },
@@ -89,14 +82,14 @@ export default class ExpenseList extends Component {
 			})
 	};
 
-	// Funcao para mudar a pagina
+	//Function to allow to move between pages
 	changePage = event => {
 		this.setState({
 			[event.target.name]: parseInt(event.target.value)
 		});
 	};
 
-	// Funcao que faz voltar para a primeira pagina da lista
+	//Function to return to the first page
 	firstPage = () => {
 		if (this.state.currentPage > 1) {
 			this.setState({
@@ -105,7 +98,7 @@ export default class ExpenseList extends Component {
 		}
 	};
 
-	// Funcao que volta para pagina anterior
+	//Function to retunr to the previously page
 	prevPage = () => {
 		if (this.state.currentPage > 1) {
 			this.setState({
@@ -114,8 +107,8 @@ export default class ExpenseList extends Component {
 		}
 	};
 
-	// Funcao que faz ir para a ultima pagina da lista
-	lasttPage = () => { // This fuction is not working
+	//Function to move to the last page
+	lasttPage = () => {
 		if (this.state.currentPage < Math.ceil(this.state.expenses.length / this.state.expensesPerPage)) {
 			this.setState({
 				currentPage: Math.ceil(this.state.expenses.length / this.state.expensesPerPage)
@@ -123,7 +116,7 @@ export default class ExpenseList extends Component {
 		}
 	};
 
-	// Funcao que faz ir para a pagina seguinte
+	//Function to go to the next page
 	nextPage = () => {
 		if (this.state.currentPage < Math.ceil(this.state.expenses.length / this.state.expensesPerPage)) {
 			this.setState({
@@ -132,17 +125,20 @@ export default class ExpenseList extends Component {
 		}
 	};
 
+	//Function to allow write data in the search box
 	searchChange = event => {
 		this.setState({
 			[event.target.name]: event.target.value
 		})
 	}
 
+	//Function to delete what was inserted in the search box
 	cancelSearch = () => {
 		this.setState({ "search": "" })
 		this.findAllExpenses(this.state.currentPage);
 	}
 
+	//Funciton to search data
 	searchData = (currentPage) => {
 		currentPage -= 1;
 		axios.get(API_URL + "search/" + this.state.search + "?page=" + currentPage + "&size=" + this.state.expensesPerPage, {

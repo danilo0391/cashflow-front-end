@@ -4,6 +4,7 @@ import BarChart from "./charts/BarChart";
 import TrendChart from "./charts/TrendChart";
 import { Card, CardColumns } from "react-bootstrap";
 
+//Dashboard import charts components and render them
 export default class Dashboard extends Component {
 	render() {
 		return (

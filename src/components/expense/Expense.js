@@ -13,7 +13,6 @@ import authHeader from "../../services/auth-header";
 
 import axios from "axios";
 
-// const API_URL = "http://localhost:8080/api/expenses/";
 const API_URL = "https://cashflow-back-end.herokuapp.com/api/expenses/";
 
 export default class Expense extends Component {
@@ -42,6 +41,7 @@ export default class Expense extends Component {
 		this.findaAllCategories();
 	}
 
+	//Function to find all categories
 	findaAllCategories = () => {
 		axios
 			.get(API_URL + "categories")
@@ -57,6 +57,7 @@ export default class Expense extends Component {
 			});
 	};
 
+	//Function to find by id
 	findExpenseById = (expenseId) => {
 		axios
 			.get(API_URL + expenseId, {
@@ -78,10 +79,12 @@ export default class Expense extends Component {
 			});
 	};
 
+	//Function to reset the form
 	resetExpense = () => {
 		this.setState(() => this.initialState);
 	};
 
+	//Function do add expense
 	addExpense = (event) => {
 		event.preventDefault();
 
@@ -107,6 +110,7 @@ export default class Expense extends Component {
 		this.setState(this.initialState);
 	};
 
+	//Function to update expense
 	updateExpense = (event) => {
 		event.preventDefault();
 
@@ -135,12 +139,14 @@ export default class Expense extends Component {
 		this.setState(this.initialState);
 	};
 
+	//This function allows to change the values in the form
 	expenseChange = (event) => {
 		this.setState({
 			[event.target.name]: event.target.value,
 		});
 	};
 
+	//This function redirects to the list of expenses
 	expenseList = () => {
 		return this.props.history.push("/listExpense");
 	};

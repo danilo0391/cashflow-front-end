@@ -6,6 +6,7 @@ import { isEmail } from "validator";
 
 import AuthService from "../services/auth-service";
 
+//Function to block empty field
 const required = (value) => {
 	if (!value) {
 		return (
@@ -16,6 +17,7 @@ const required = (value) => {
 	}
 };
 
+//Function to block empty field for email
 const email = (value) => {
 	if (!isEmail(value)) {
 		return (
@@ -26,6 +28,7 @@ const email = (value) => {
 	}
 };
 
+//Function to block empty field for username
 const vusername = (value) => {
 	if (value.length < 3 || value.length > 20) {
 		return (
@@ -36,6 +39,7 @@ const vusername = (value) => {
 	}
 };
 
+//Function to block empty field for password
 const vpassword = (value) => {
 	if (value.length < 6 || value.length > 40) {
 		return (
@@ -63,26 +67,29 @@ export default class Register extends Component {
 		};
 	}
 
+	//Function to allow data into the field
 	onChangeUsername(e) {
 		this.setState({
 			username: e.target.value,
 		});
 	}
 
+	//Function to allow data into the field
 	onChangeEmail(e) {
 		this.setState({
 			email: e.target.value,
 		});
 	}
 
+	//Function to allow data into the field
 	onChangePassword(e) {
 		this.setState({
 			password: e.target.value,
 		});
 	}
 
+	//Function that takes all information from the register form and save a new user
 	handleRegister(e) {
-		console.log("Amilcar");
 		e.preventDefault();
 
 		this.setState({
@@ -125,12 +132,6 @@ export default class Register extends Component {
 		return (
 			<div className="col-md-12">
 				<div className="card card-container">
-					{/* <img
-						src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-						alt="profile-img"
-						className="profile-img-card"
-					/> */}
-
 					<Form
 						onSubmit={this.handleRegister}
 						ref={(c) => {

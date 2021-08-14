@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar, Container, Col } from "react-bootstrap";
 
+//Footer of the web application
 export default function Footer(props) {
 	let fullYear = new Date().getFullYear();
 

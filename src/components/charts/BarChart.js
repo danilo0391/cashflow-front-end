@@ -6,6 +6,7 @@ import axios from "axios";
 import authHeader from "../../services/auth-header";
 
 export default class BarChart extends Component {
+	//Default constructor
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -16,19 +17,19 @@ export default class BarChart extends Component {
 	componentDidMount() {
 		const API_URL =
 			"https://cashflow-back-end.herokuapp.com/api/expenses/default";
+		//Axios function to handle comunication with the back-end
 		axios
 			.get(API_URL, {
 				headers: { Authorization: authHeader().Authorization },
 			})
 			.then((res) => {
 				const expenses = res.data;
-				let expenseValue = [];
-				console.log(expenses[1]);
-				let expenseCategory = [];
+				let expenseValue = []; //variable to hold values
+				let expenseCategory = []; //variable to hold category
 				expenses.forEach((element) => {
-					const index = expenseCategory.indexOf(element.category);
+					const index = expenseCategory.indexOf(element.category); //variable to hold the index of category
 					if (index >= 0) {
-						expenseValue[index] += element.value;
+						expenseValue[index] += element.value; //take the valeu and add in each interation
 					} else {
 						expenseValue.push(element.value);
 						expenseCategory.push(element.category);

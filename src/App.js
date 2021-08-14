@@ -17,6 +17,7 @@ import Register from "./components/register";
 import Profile from "./components/profile";
 import Dashboard from "./components/Dashboard";
 
+//All the routes that are being rendering depending on the user navegation
 export default function App() {
 	return (
 		<Router>

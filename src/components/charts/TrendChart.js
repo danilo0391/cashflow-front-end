@@ -6,6 +6,7 @@ import axios from "axios";
 import authHeader from "../../services/auth-header";
 
 export default class TrendChart extends Component {
+	//Default constructor
 	constructor(props) {
 		console.log(props);
 		super(props);
@@ -18,19 +19,19 @@ export default class TrendChart extends Component {
 	componentDidMount() {
 		const API_URL =
 			"https://cashflow-back-end.herokuapp.com/api/incomes/default";
+		//Axios function to handle comunication with the back-end
 		axios
 			.get(API_URL, {
 				headers: { Authorization: authHeader().Authorization },
 			})
 			.then((res) => {
 				const incomes = res.data;
-				let incomeValue = [];
-				console.log(incomes[1]);
-				let incomeCategory = [];
+				let incomeValue = []; //variable to hold values
+				let incomeCategory = []; //variable to hold category
 				incomes.forEach((element) => {
 					const index = incomeCategory.indexOf(element.category);
 					if (index >= 0) {
-						incomeValue[index] += element.value;
+						incomeValue[index] += element.value; //take the valeu and add in each interation
 					} else {
 						incomeValue.push(element.value);
 						incomeCategory.push(element.date);

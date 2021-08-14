@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Toast } from "react-bootstrap";
 
+//My toast is a pop up text box to confirm inclusion, alteration and deletion of income, expense, and user
 export default class MyToast extends Component {
 	render() {
 		const toastCss = {

@@ -26,6 +26,7 @@ export default class UsersComponent extends Component {
 		this.findAllUsers();
 	}
 
+	//Function to find all users
 	findAllUsers() {
 		axios.get(API_URL, {
 			headers: { Authorization: authHeader().Authorization },
@@ -53,14 +54,14 @@ export default class UsersComponent extends Component {
 			})
 	};
 
-	// Funcao para mudar a pagina
+	//Function to allow to move between pages
 	changePage = event => {
 		this.setState({
 			[event.target.name]: parseInt(event.target.value)
 		});
 	};
 
-	// Funcao que faz voltar para a primeira pagina da lista
+	//Function to return to the first page
 	firstPage = () => {
 		if (this.state.currentPage > 1) {
 			this.setState({
@@ -69,7 +70,7 @@ export default class UsersComponent extends Component {
 		}
 	};
 
-	// Funcao que volta para pagina anterior
+	//Function to retunr to the previously page
 	prevPage = () => {
 		if (this.state.currentPage > 1) {
 			this.setState({
@@ -78,7 +79,7 @@ export default class UsersComponent extends Component {
 		}
 	};
 
-	// Funcao que faz ir para a ultima pagina da lista
+	//Function to move to the last page
 	lasttPage = () => { // This fuction is not working
 		if (this.state.currentPage < Math.ceil(this.state.users.length / this.state.usersPerPage)) {
 			this.setState({
@@ -87,7 +88,7 @@ export default class UsersComponent extends Component {
 		}
 	};
 
-	// Funcao que faz ir para a pagina seguinte
+	//Function to go to the next page
 	nextPage = () => {
 		if (this.state.currentPage < Math.ceil(this.state.users.length / this.state.usersPerPage)) {
 			this.setState({

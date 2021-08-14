@@ -30,18 +30,21 @@ export default class Login extends Component {
 		};
 	}
 
+	//Function to allow data in the username field
 	onChangeUsername(e) {
 		this.setState({
 			username: e.target.value,
 		});
 	}
 
+	//Function to allow data in the password field
 	onChangePassword(e) {
 		this.setState({
 			password: e.target.value,
 		});
 	}
 
+	//Function to check if the user is correct and permit access to the system
 	handleLogin(e) {
 		e.preventDefault();
 
@@ -83,14 +86,6 @@ export default class Login extends Component {
 		return (
 			<div className="col-md-12">
 				<div className="card card-container">
-					{/* {
-					<img
-						src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-						alt="profile-img"
-						style="myStyle"
-					/>
-				} */}
-
 					<Form
 						onSubmit={this.handleLogin}
 						ref={(c) => {
